@@ -14,7 +14,7 @@ app.post("/upload-video",upload.single("file"),async(req,res)=>{
 
     try{
         const result=await axios.post(
-            "https://YOUR-PYTHON-URL/video-dub",
+            "https://https://ai-ouub.onrender.com/video-dub",
             file,
             {
                 headers:{
