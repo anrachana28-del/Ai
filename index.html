@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AI Video Khmer Dubbing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Khmer Video</title>
 
 <style>
 body{
@@ -33,38 +32,39 @@ button{
 
 video{
   width:100%;
-  margin-top:10px;
-  border-radius:10px;
+  margin-top:15px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="box">
 
-<h2>🎬 MP4 → Khmer AI Dubbing</h2>
+<h2>🎬 Khmer AI Dubbing</h2>
 
 <input type="file" id="file" accept="video/*">
-<br>
+
+<br><br>
 
 <button onclick="upload()">Upload Video</button>
 
-<div id="result" style="display:none;margin-top:20px;">
+<div id="result" style="display:none">
 
 <h3>Original Text</h3>
 <p id="original"></p>
 
-<h3>Khmer Text</h3>
+<h3>Khmer Translation</h3>
 <p id="khmer"></p>
 
-<h3>🎥 Output Video</h3>
+<h3>Translated Video</h3>
+
 <video id="video" controls></video>
 
 <br><br>
 
-<a id="download" download="khmer-dubbed.mp4">
-<button>⬇ Download Video</button>
+<a id="download" download="khmer-video.mp4">
+<button>⬇ Download</button>
 </a>
 
 </div>
@@ -72,6 +72,7 @@ video{
 </div>
 
 <script>
+
 async function upload(){
 
     const file=document.getElementById("file").files[0];
@@ -84,23 +85,30 @@ async function upload(){
     const form=new FormData();
     form.append("file",file);
 
-    const res=await fetch("https://ai-ouub.onrender.com/upload-video",{
-        method:"POST",
-        body:form
-    });
+    const res=await fetch(
+        "https://ai01.onrender.com/upload-video",
+        {
+            method:"POST",
+            body:form
+        }
+    );
 
     const data=await res.json();
 
     document.getElementById("result").style.display="block";
 
     document.getElementById("original").innerText=data.original_text;
+
     document.getElementById("khmer").innerText=data.khmer_text;
 
-    const videoURL="https://YOUR-NODE-URL/files/"+data.video;
+    const videoURL=
+    "https://ai01.onrender.com/files/"+data.video;
 
     document.getElementById("video").src=videoURL;
+
     document.getElementById("download").href=videoURL;
 }
+
 </script>
 
 </body>
